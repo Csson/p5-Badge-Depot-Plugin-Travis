@@ -5,7 +5,7 @@ name: Badge-Depot-Plugin-Travis
 +prereqs:
   runtime:
     requires:
-     - perl: 5.014000
+     - perl: 5.010_001
      - Moose: 2.0000
      - Badge::Depot
      - namespace::autoclean
@@ -13,6 +13,10 @@ name: Badge-Depot-Plugin-Travis
 
 +plugins:
  - +config: Author::CSSON
+
+ - +add_plugin: TravisYML
+   +before: Git::Tag
+   perl_version: 5.10.1 5.14 5.20
 
 ---
 +doctype: weaver

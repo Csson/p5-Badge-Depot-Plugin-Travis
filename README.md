@@ -41,6 +41,10 @@ Github branch.
 
 - [Badge::Depot](https://metacpan.org/pod/Badge::Depot)
 
+# SOURCE
+
+[https://github.com/Csson/p5-Badge-Depot-Plugin-Travis](https://github.com/Csson/p5-Badge-Depot-Plugin-Travis)
+
 # HOMEPAGE
 
 [https://metacpan.org/release/Badge-Depot-Plugin-Travis](https://metacpan.org/release/Badge-Depot-Plugin-Travis)
