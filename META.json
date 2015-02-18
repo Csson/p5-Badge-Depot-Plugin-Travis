@@ -93,7 +93,7 @@
             "Moose" : "2.0000",
             "Types::Standard" : "0",
             "namespace::autoclean" : "0",
-            "perl" : "5.010_001"
+            "perl" : "5.010001"
          }
       },
       "test" : {
