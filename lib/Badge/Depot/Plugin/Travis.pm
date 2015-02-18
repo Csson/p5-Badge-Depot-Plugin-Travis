@@ -7,9 +7,9 @@ use Moose;
 use namespace::autoclean;
 use Types::Standard qw/Str/;
 with 'Badge::Depot';
-    
+
 # VERSION
-# ABSTRACT: Short intro
+# ABSTRACT: Travis plugin for Badge::Depot
 
 has user => (
     is => 'ro',
@@ -51,7 +51,7 @@ __END__
 
 =head1 DESCRIPTION
 
-Add a L<Travis|https://travis-ci.org> badge to your documentation.
+Create a L<Travis|https://travis-ci.org> badge for a github repository.
 
 This class consumes the L<Badge::Depot> role.
 

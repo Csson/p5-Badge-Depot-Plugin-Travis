@@ -5,7 +5,7 @@ use Test::More;
 use if $ENV{'AUTHOR_TESTING'}, 'Test::Warnings';
 
 BEGIN {
-	use_ok 'Badge::Depot::Plugin::Travis';
+    use_ok 'Badge::Depot::Plugin::Travis';
 }
 
 my $badge = Badge::Depot::Plugin::Travis->new(user => 'testuser', repo => 'testrepo', branch => 'testbranch');

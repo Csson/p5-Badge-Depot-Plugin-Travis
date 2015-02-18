@@ -8,6 +8,8 @@ name: Badge-Depot-Plugin-Travis
      - perl: 5.014000
      - Moose: 2.0000
      - Badge::Depot
+     - namespace::autoclean
+     - Types::Standard
 
 +plugins:
  - +config: Author::CSSON

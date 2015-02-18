@@ -1,10 +1,10 @@
 # NAME
 
-Badge::Depot::Plugin::Travis - Short intro
+Badge::Depot::Plugin::Travis - Travis plugin for Badge::Depot
 
 # VERSION
 
-Version 0.0001, released 2015-02-17.
+Version 0.0001, released 2015-02-18.
 
 # SYNOPSIS
 
@@ -17,7 +17,7 @@ Version 0.0001, released 2015-02-17.
 
 # DESCRIPTION
 
-Add a [Travis](https://travis-ci.org) badge to your documentation.
+Create a [Travis](https://travis-ci.org) badge for a github repository.
 
 This class consumes the [Badge::Depot](https://metacpan.org/pod/Badge::Depot) role.
 
