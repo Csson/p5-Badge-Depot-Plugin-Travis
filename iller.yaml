@@ -12,6 +12,7 @@ prereqs:
      - Badge::Depot
      - namespace::autoclean
      - Types::Standard
+     - JSON::MaybeXS
 
 plugins:
  - +config: Author::CSSON
