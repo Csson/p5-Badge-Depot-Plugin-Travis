@@ -111,7 +111,7 @@
    "provides" : {
       "Badge::Depot::Plugin::Travis" : {
          "file" : "lib/Badge/Depot/Plugin/Travis.pm",
-         "version" : "0.0200"
+         "version" : "0.0201"
       }
    },
    "release_status" : "stable",
@@ -126,6 +126,6 @@
          "web" : "https://github.com/Csson/p5-Badge-Depot-Plugin-Travis"
       }
    },
-   "version" : "0.0200"
+   "version" : "0.0201"
 }
 

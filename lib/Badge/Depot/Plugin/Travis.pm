@@ -96,11 +96,11 @@ This class consumes the L<Badge::Depot> role.
 
 =head1 ATTRIBUTES
 
-The C<user> and C<repo> attributes are required or optional, depending on your configuration. It looks for the C<resources/repository/web> setting in C<META.json>.
+The C<user> and C<repo> attributes are required or optional, depending on your configuration. It looks for the C<resources/repository/web> setting in C<META.json>:
 
-If C<META.json> doesn't exist in the dist root, C<user> and C<repo> are required.
-
-If C<resources/repository/web> doesn't exist (or is not a github url), C<resources/repository/web> are required.
+=for :list
+* If C<META.json> doesn't exist in the dist root, C<user> and C<repo> are required.
+* If C<resources/repository/web> doesn't exist (or is not a github url), C<user> and C<repo> are required.
 
 =head2 user
 
@@ -112,7 +112,7 @@ Github repository.
 
 =head2 branch
 
-Optional, C<master> by default. Github branch.
+Github branch. Optional, C<master> by default.
 
 =head1 SEE ALSO
 
