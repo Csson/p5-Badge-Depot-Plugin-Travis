@@ -1,8 +1,10 @@
 ---
-+doctype: dist
-name: Badge-Depot-Plugin-Travis
+doctype: dist
 
-+prereqs:
+header:
+  name: Badge-Depot-Plugin-Travis
+
+prereqs:
   runtime:
     requires:
      - perl: 5.010001
@@ -11,7 +13,7 @@ name: Badge-Depot-Plugin-Travis
      - namespace::autoclean
      - Types::Standard
 
-+plugins:
+plugins:
  - +config: Author::CSSON
 
  - +add_plugin: TravisYML
@@ -19,9 +21,9 @@ name: Badge-Depot-Plugin-Travis
    perl_version: 5.10.1 5.14 5.20
 
 ---
-+doctype: weaver
+doctype: weaver
 
-+plugins:
+plugins:
  - +config: Author::CSSON
 
  - +remove_plugin: Splint

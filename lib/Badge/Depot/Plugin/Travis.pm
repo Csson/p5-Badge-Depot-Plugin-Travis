@@ -5,7 +5,9 @@ package Badge::Depot::Plugin::Travis;
 
 use Moose;
 use namespace::autoclean;
-use Types::Standard qw/Str/;
+use Types::Standard qw/Str HashRef/;
+use Path::Tiny;
+use JSON::MaybeXS 'decode_json';
 with 'Badge::Depot';
 
 # VERSION
@@ -14,18 +16,55 @@ with 'Badge::Depot';
 has user => (
     is => 'ro',
     isa => Str,
-    required => 1,
+    lazy => 1,
+    default => sub {
+        my $self = shift;
+        if($self->has_meta) {
+            return $self->_meta->{'username'} if exists $self->_meta->{'username'};
+        }
+    },
 );
 has repo => (
     is => 'ro',
     isa => Str,
-    required => 1,
+    lazy => 1,
+    default => sub {
+        my $self = shift;
+        if($self->has_meta) {
+            return $self->_meta->{'repo'} if exists $self->_meta->{'repo'};
+        }
+    },
 );
 has branch => (
     is => 'ro',
     isa => Str,
-    required => 1,
+    default => 'master',
 );
+has _meta => (
+    is => 'ro',
+    isa => HashRef,
+    predicate => 'has_meta',
+    builder => '_build_meta',
+);
+
+sub _build_meta {
+    my $self = shift;
+
+    return if !path('META.json')->exists;
+
+    my $json = path('META.json')->slurp_utf8;
+    my $data = decode_json($json);
+
+    return if !exists $data->{'resources'}{'repository'}{'web'};
+
+    my $repository = $data->{'resources'}{'repository'}{'web'};
+    return if $repository !~ m{^https://(?:www\.)?github\.com/([^/]+)/(.*)(?:\.git)?$};
+
+    return {
+        username => $1,
+        repo => $2,
+    };
+}
 
 sub BUILD {
     my $self = shift;
@@ -57,7 +96,11 @@ This class consumes the L<Badge::Depot> role.
 
 =head1 ATTRIBUTES
 
-All attributes are required.
+The C<user> and C<repo> attributes are required or optional, depending on your configuration. It looks for the C<resources/repository/web> setting in C<META.json>.
+
+If C<META.json> doesn't exist in the dist root, C<user> and C<repo> are required.
+
+If C<resources/repository/web> doesn't exist (or is not a github url), C<resources/repository/web> are required.
 
 =head2 user
 
@@ -69,7 +112,7 @@ Github repository.
 
 =head2 branch
 
-Github branch.
+Optional, C<master> by default. Github branch.
 
 =head1 SEE ALSO
 
