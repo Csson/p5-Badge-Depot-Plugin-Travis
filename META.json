@@ -92,6 +92,7 @@
             "Badge::Depot" : "0",
             "JSON::MaybeXS" : "0",
             "Moose" : "2.0000",
+            "Path::Tiny" : "0",
             "Types::Standard" : "0",
             "namespace::autoclean" : "0",
             "perl" : "5.010001"
@@ -111,7 +112,7 @@
    "provides" : {
       "Badge::Depot::Plugin::Travis" : {
          "file" : "lib/Badge/Depot/Plugin/Travis.pm",
-         "version" : "0.0201"
+         "version" : "0.0202"
       }
    },
    "release_status" : "stable",
@@ -126,6 +127,6 @@
          "web" : "https://github.com/Csson/p5-Badge-Depot-Plugin-Travis"
       }
    },
-   "version" : "0.0201"
+   "version" : "0.0202"
 }
 

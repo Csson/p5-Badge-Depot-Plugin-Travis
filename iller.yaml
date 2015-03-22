@@ -13,6 +13,7 @@ prereqs:
      - namespace::autoclean
      - Types::Standard
      - JSON::MaybeXS
+     - Path::Tiny
 
 plugins:
  - +config: Author::CSSON
@@ -28,3 +29,5 @@ plugins:
  - +config: Author::CSSON
 
  - +remove_plugin: Splint
+
+ - +remove_plugin: Badges
