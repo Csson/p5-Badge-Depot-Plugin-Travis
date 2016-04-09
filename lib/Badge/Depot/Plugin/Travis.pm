@@ -12,7 +12,7 @@ with 'Badge::Depot';
 
 # ABSTRACT: Travis plugin for Badge::Depot
 # AUTHORITY
-our $VERSION = '0.0203';
+our $VERSION = '0.0204';
 
 has user => (
     is => 'ro',
