@@ -2,9 +2,19 @@
 
 Badge::Depot::Plugin::Travis - Travis plugin for Badge::Depot
 
+<div>
+    <p>
+    <img src="https://img.shields.io/badge/perl-5.10+-blue.svg" alt="Requires Perl 5.10+" />
+    <a href="https://travis-ci.org/Csson/p5-Badge-Depot-Plugin-Travis"><img src="https://api.travis-ci.org/Csson/p5-Badge-Depot-Plugin-Travis.svg?branch=master" alt="Travis status" /></a>
+    <a href="http://cpants.cpanauthors.org/dist/Badge-Depot-Plugin-Travis-0.0203"><img src="https://badgedepot.code301.com/badge/kwalitee/Badge-Depot-Plugin-Travis/0.0203" alt="Distribution kwalitee" /></a>
+    <a href="http://matrix.cpantesters.org/?dist=Badge-Depot-Plugin-Travis%200.0203"><img src="https://badgedepot.code301.com/badge/cpantesters/Badge-Depot-Plugin-Travis/0.0203" alt="CPAN Testers result" /></a>
+    <img src="https://img.shields.io/badge/coverage-67.3%-red.svg" alt="coverage 67.3%" />
+    </p>
+</div>
+
 # VERSION
 
-Version 0.0001, released 2015-02-18.
+Version 0.0203, released 2016-04-09.
 
 # SYNOPSIS
 
@@ -23,7 +33,10 @@ This class consumes the [Badge::Depot](https://metacpan.org/pod/Badge::Depot) ro
 
 # ATTRIBUTES
 
-All attributes are required.
+The `user` and `repo` attributes are required or optional, depending on your configuration. It looks for the `resources/repository/web` setting in `META.json`:
+
+- If `META.json` doesn't exist in the dist root, `user` and `repo` are required.
+- If `resources/repository/web` doesn't exist (or is not a github url), `user` and `repo` are required.
 
 ## user
 
@@ -35,7 +48,7 @@ Github repository.
 
 ## branch
 
-Github branch.
+Github branch. Optional, `master` by default.
 
 # SEE ALSO
 
@@ -55,7 +68,7 @@ Erik Carlsson <info@code301.com>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2015 by Erik Carlsson <info@code301.com>.
+This software is copyright (c) 2016 by Erik Carlsson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

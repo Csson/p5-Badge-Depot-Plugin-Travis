@@ -1,4 +1,42 @@
 Revision history for Badge-Depot-Plugin-Travis
 
 {{$NEXT}}
-     - Initial release
+ [API Changes]
+
+ [Bug Fixes]
+  - Fix issue when META.json is missing (closes #1)
+
+ [Documentation]
+  - Add the badges.
+
+ [Enhancements]
+
+ [Meta]
+
+ [New Features]
+
+ [Requirements]
+
+ [Revision]
+
+ [Testing]
+
+0.0202 2015-03-22T14:53:31Z CET
+ [Requirements]
+ - Listed Path::Tiny as a prereq.
+
+0.0201 2015-03-21T16:11:38Z CET
+ [Documentation]
+ - Fixed typo and small layout improvement.
+
+0.0200 2015-03-21T16:06:36Z CET
+ [Enhancements]
+ - The branch is now 'master' by default.
+ - If META.json contains repository information (and it is a github
+   repository), user and repo uses that data automatically.
+
+ [Requirements]
+ - Added JSON::MaybeXS as a runtime prereq.
+
+0.0100 2015-02-18T01:52:24Z CET
+ - Initial release

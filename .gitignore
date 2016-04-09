@@ -1,7 +1,12 @@
-/Badge-Depot-Plugin-Travis-*
+# This file was auto-generated from iller.yaml by Dist::Iller on 2016-04-09 18:54:19 UTC.
+# The following configs were used:
+# * Dist::Iller::Config::Author::CSSON: 0.0309
+
 /.build
 /_build*
 /Build
 MYMETA.*
 !META.json
 /.prove
+/Badge-Depot-Plugin-Travis-*
+.coverhistory.json
