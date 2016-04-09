@@ -10,8 +10,9 @@ use Path::Tiny;
 use JSON::MaybeXS 'decode_json';
 with 'Badge::Depot';
 
-# VERSION
 # ABSTRACT: Travis plugin for Badge::Depot
+# AUTHORITY
+our $VERSION = '0.0203';
 
 has user => (
     is => 'ro',
