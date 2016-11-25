@@ -20,9 +20,7 @@ has user => (
     lazy => 1,
     default => sub {
         my $self = shift;
-        if($self->has_meta) {
-            return $self->_meta->{'username'} if exists $self->_meta->{'username'};
-        }
+        return $self->_meta->{'username'} if exists $self->_meta->{'username'};
     },
 );
 has repo => (
@@ -31,9 +29,7 @@ has repo => (
     lazy => 1,
     default => sub {
         my $self = shift;
-        if($self->has_meta) {
-            return $self->_meta->{'repo'} if exists $self->_meta->{'repo'};
-        }
+        return $self->_meta->{'repo'} if exists $self->_meta->{'repo'};
     },
 );
 has branch => (
@@ -44,19 +40,37 @@ has branch => (
 has _meta => (
     is => 'ro',
     isa => HashRef,
+    lazy => 1,
     predicate => 'has_meta',
     builder => '_build_meta',
 );
 
+sub _distmeta {
+    my $self = shift;
+
+    my $data;
+
+    if ($self->can('has_zilla') && $self->has_zilla) {
+        $data = $self->zilla->distmeta;
+    }
+    else {
+        my $path = path('META.json');
+
+        if ($path->exists) {
+            my $json = $path->slurp_utf8;
+            $data = decode_json($json);
+        }
+    }
+
+    return $data;
+}
+
 sub _build_meta {
     my $self = shift;
 
-    return {} if !path('META.json')->exists;
+    my $data = $self->_distmeta;
 
-    my $json = path('META.json')->slurp_utf8;
-    my $data = decode_json($json);
-
-    return {} if !exists $data->{'resources'}{'repository'}{'web'};
+    return {} if ref $data ne 'HASH' || !exists $data->{'resources'}{'repository'}{'web'};
 
     my $repository = $data->{'resources'}{'repository'}{'web'};
     return {} if $repository !~ m{^https://(?:www\.)?github\.com/([^/]+)/(.*)(?:\.git)?$};
@@ -69,9 +83,29 @@ sub _build_meta {
 
 sub BUILD {
     my $self = shift;
-    $self->link_url(sprintf 'https://travis-ci.org/%s/%s', $self->user, $self->repo);
-    $self->image_url(sprintf 'https://api.travis-ci.org/%s/%s.svg?branch=%s', $self->user, $self->repo, $self->branch);
+
+    my $user = $self->user;
+    my $repo = $self->repo;
+
+    if (!$user) {
+        $self->log('Could not determine GitHub username');
+        return;
+    }
+    if (!$repo) {
+        $self->log('Could not determine GitHub repository');
+        return;
+    }
+
+    $self->link_url(sprintf 'https://travis-ci.org/%s/%s', $user, $repo);
+    $self->image_url(sprintf 'https://api.travis-ci.org/%s/%s.svg?branch=%s', $user, $repo, $self->branch);
     $self->image_alt('Travis status');
+}
+
+sub log {
+    my $self = shift;
+    my $text = shift;
+
+    print "[Badge/Travis] $text\n";
 }
 
 1;
@@ -97,9 +131,10 @@ This class consumes the L<Badge::Depot> role.
 
 =head1 ATTRIBUTES
 
-The C<user> and C<repo> attributes are required or optional, depending on your configuration. It looks for the C<resources/repository/web> setting in C<META.json>:
+The C<user> and C<repo> attributes are required or optional, depending on your configuration. It looks for the C<resources/repository/web> setting in C<< $zilla->distmeta >> and C<META.json>:
 
 =for :list
+* With L<Badge::Depot> 0.0104 or later, C<user> and C<repo> may be detected from L<Dist::Zilla/distmeta>.
 * If C<META.json> doesn't exist in the dist root, C<user> and C<repo> are required.
 * If C<resources/repository/web> doesn't exist (or is not a github url), C<user> and C<repo> are required.
 
