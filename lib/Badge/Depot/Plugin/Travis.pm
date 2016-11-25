@@ -69,9 +69,29 @@ sub _build_meta {
 
 sub BUILD {
     my $self = shift;
-    $self->link_url(sprintf 'https://travis-ci.org/%s/%s', $self->user, $self->repo);
-    $self->image_url(sprintf 'https://api.travis-ci.org/%s/%s.svg?branch=%s', $self->user, $self->repo, $self->branch);
+
+    my $user = $self->user;
+    my $repo = $self->repo;
+
+    if (!$user) {
+        $self->log('Could not determine GitHub username');
+        return;
+    }
+    if (!$repo) {
+        $self->log('Could not determine GitHub repository');
+        return;
+    }
+
+    $self->link_url(sprintf 'https://travis-ci.org/%s/%s', $user, $repo);
+    $self->image_url(sprintf 'https://api.travis-ci.org/%s/%s.svg?branch=%s', $user, $repo, $self->branch);
     $self->image_alt('Travis status');
+}
+
+sub log {
+    my $self = shift;
+    my $text = shift;
+
+    print "[Badge/Travis] $text\n";
 }
 
 1;
